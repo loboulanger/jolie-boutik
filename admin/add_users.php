@@ -94,11 +94,11 @@
                         <h3 class="h4">Ajouter un utilisateur</h3>
                       </div>
                       <div class="card-body">
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" method="post">
                           <div class="form-group row">
                             <label class="col-sm-3 form-control-label">Nom d'utilisateur</label>
                             <div class="col-sm-9">
-                              <input type="text" class="form-control">
+                              <input type="text" class="form-control" name="name_users">
                             </div>
                           </div>
                           <div class="line"></div>
@@ -112,7 +112,7 @@
                           <div class="form-group row">
                               <label class="col-sm-3 form-control-label">Confirmer le mot de passe</label>
                               <div class="col-sm-9">
-                                <input type="password" name="password" class="form-control">
+                                <input type="password" name="password2" class="form-control">
                               </div>
                           </div>
                           <div class="line"></div>
@@ -151,6 +151,72 @@
           </div>
       </div>
     </div>
+
+    <?php
+
+    $saisieOK = true;
+   
+    // Je récupère les infos saisies par l'utilisateur
+    if ( isset($_POST) && !empty($_POST) ) {
+
+      // Je controle le nom de l'utilisateur (chaine de caractères)
+      if (empty($_POST['name_users']) || !is_string($_POST['name_users']) ) {
+        $saisieOK  = false;
+       
+      }      
+
+      // je controle le psw1
+      if (preg_match('#^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[a-zA-Z0-9]{8,12}$#', $_POST['password'])) {
+      } else { 
+          $saisieOK  = false;
+      
+      };
+
+      // Je contrele le psw2
+      if (preg_match('#^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[a-zA-Z0-9]{8,12}$#',$_POST['password2'])) {
+       } else { 
+          $saisieOK  = false;
+      
+      };
+
+      // Je controle l'égalité entre psw1 et psw2 
+      if ($_POST['password'] != $_POST['password2']) { 
+         $saisieOK  = false;
+      
+      }
+
+      // Je controle le role 
+      if (!isset($_POST['account']) || ( ($_POST['account']) != "Vendeur" &&  ($_POST['account']) != "Admin") ) {
+           $saisieOK  = false;
+      
+      }
+
+      if ($saisieOK) {
+
+          // connexion à la base de données
+          try
+        {
+            $connexion = new PDO('mysql:host=localhost;dbname=boutik;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+        }
+
+          // Redefini le message d'erreur pour éviter trop d'infos restitutées
+          catch(Exception $e) {die('Erreur : ' .  $e->getmessage());};
+
+                   
+          // Je prépare ma requete
+          $resultat = $connexion->prepare('INSERT INTO users (name, password, role) VALUES (:name, :psw, :role)');
+          $resultat->bindValue(':name', $_POST['name_users']);
+          $resultat->bindValue(':psw', password_hash($_POST['password'], PASSWORD_DEFAULT));
+          $resultat->bindValue(':role', $_POST['account']);
+
+          // j'execute la requete
+          $resultat->execute();
+      } else {
+        echo "saisie incorrecte";
+              }
+    }
+    ?>
+
     <!-- JavaScript files-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/popper.js/umd/popper.min.js"> </script>

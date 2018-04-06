@@ -178,14 +178,14 @@ include 'templates/header.php';
     $mail->Body = "Merci";
                                         
     //envoi du mail
-    if(!$mail->send()){
-        //echec de l'envoi
-        echo 'erreur lors de l\'envoi du mail';
-        echo 'Erreur: ' . $mail->ErrorInfo;
-    }
-        else{
-            echo 'mail envoyé';
-    }
+    //if(!$mail->send()){
+    //    //echec de l'envoi
+    //    echo 'erreur lors de l\'envoi du mail';
+    //    echo 'Erreur: ' . $mail->ErrorInfo;
+    //}
+    //    else{
+    //        echo 'mail envoyé';
+    //}
   
   
 ?>
