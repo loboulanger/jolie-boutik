@@ -1,11 +1,7 @@
 <?php require "templates/header.php"; 
-	  require_once('inc/bdd.php');
-		
-	  		$resultat = $bdd->prepare('SELECT * FROM products LEFT JOIN  pictures ON products.id_pictures = pictures.id_pictures LIMIT 4');
-            $resultat->execute();                        
-            $product = $resultat->fetchAll(PDO::FETCH_ASSOC);
 
-	  	
+
+
 
 ?>
 
@@ -43,7 +39,7 @@
 						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="rollIn" data-delay="0">
 								<span class="ltext-101 cl2 respon2">
-									Collection Automne Hiver Homme
+									Collection Homme Automne Hiver 
 								</span>
 							</div>
 								
@@ -123,13 +119,9 @@
 			</div>
 
 			<div class="row isotope-grid">
-				
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
 					<!-- Block2 -->
 					<div class="block2">
-						<?php
-                        foreach($products as $product){
-                        ?>
 						<div class="block2-pic hov-img0">
 							<img src="images/product-01.jpg" alt="IMG-PRODUCT">
 
@@ -140,21 +132,95 @@
 
 						<div class="block2-txt flex-w flex-t p-t-14">
 							<div class="block2-txt-child1 flex-col-l ">
-								
 								<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-									<?= $product['name']; ?>									
-								</a>								
-								<span class="stext-105 cl3">
-									<?= $product['price']; ?>							 
-								</span>			    
+									Chemise Esprit Ruffle 
+								</a>
 
+								<span class="stext-105 cl3">
+									16.64€									 
+								</span>
 							</div>							
 						</div>
-				        <?php
-                        }
-                        ?>
 					</div>
 				</div>
+
+				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+					<!-- Block2 -->
+					<div class="block2">
+						<div class="block2-pic hov-img0">
+							<img src="images/product-02.jpg" alt="IMG-PRODUCT">
+
+							<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+								Aperçu
+							</a>
+						</div>
+
+						<div class="block2-txt flex-w flex-t p-t-14">
+							<div class="block2-txt-child1 flex-col-l ">
+								<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									Chemise Herschel 
+								</a>
+
+								<span class="stext-105 cl3">
+									35.31€
+								</span>
+							</div>							
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item men">
+					<!-- Block2 -->
+					<div class="block2">
+						<div class="block2-pic hov-img0">
+							<img src="images/product-03.jpg" alt="IMG-PRODUCT">
+
+							<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+								Aperçu
+							</a>
+						</div>
+
+						<div class="block2-txt flex-w flex-t p-t-14">
+							<div class="block2-txt-child1 flex-col-l ">
+								<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									Pantalon Only Check 
+								</a>
+
+								<span class="stext-105 cl3">
+									25.50€
+								</span>
+							</div>							
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+					<!-- Block2 -->
+					<div class="block2">
+						<div class="block2-pic hov-img0">
+							<img src="images/product-04.jpg" alt="IMG-PRODUCT">
+
+							<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+								Aperçu
+							</a>
+						</div>
+
+						<div class="block2-txt flex-w flex-t p-t-14">
+							<div class="block2-txt-child1 flex-col-l ">
+								<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									Trench Coat Classique
+								</a>
+
+								<span class="stext-105 cl3">
+									75.00€
+								</span>
+							</div>							
+						</div>
+					</div>
+				</div>			
+
+				
+			</div>
 
 			<!-- Load more -->
 			<div class="flex-c-m flex-w w-full p-t-45">
