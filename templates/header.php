@@ -35,6 +35,7 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/jolie-boutik.css">
 <!--===============================================================================================-->
 </head>
 <body class="animsition">
@@ -47,10 +48,8 @@
 			<div class="wrap-menu-desktop">
 				<nav class="limiter-menu-desktop container">
 					
-					<!-- Logo desktop -->		
-					<a href="#" class="logo">
-						<img src="images/icons/logo-01.png" alt="IMG-LOGO">
-					</a>
+					<!-- Logo desktop -->
+					<h2 class="logo"><span class="logo__bold">Jolie</span> Boutik</h2>
 
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
@@ -59,7 +58,7 @@
 								<a href="index.php">Accueil</a>
 							</li>
 
-							<li class="label1" data-label1="new">
+							<li>
 								<a href="product.php">Boutique</a>
 							</li>
 

@@ -1,0 +1,15 @@
+/* Menu s'affiche en haut du .container */
+.wrap-menu-desktop {
+    top: 0;
+}
+
+/* Size de l'icône de connexion */
+.material-icons {
+    font-size: 28px;
+}
+
+/* Logo */
+span.logo__bold {
+    font-family: Poppins-Bold;
+    margin-right: 4px;
+}
