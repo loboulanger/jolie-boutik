@@ -3,7 +3,7 @@
 ## To Do List
 
 ### Front-office
-- Moteurs de recherche (global, par nom et par catégorie via la page products.php
+- Moteurs de recherche (global, par nom et par catégorie via la page products.php)
 - Pagination sur la page products.php
 
 ### Back-office
