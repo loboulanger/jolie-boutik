@@ -15,7 +15,7 @@
 
 #### Page Utilisateurs
 - Stratégie pour ajout d'un nouvel utilisateur
-- Liste de tous les utilisateurs (si admin)
+- Liste de tous les utilisateurs
 
 #### Page Profil
 - Possibilité d'ajouter ou mettre à jour l'image de profil (avatar)
