@@ -8,7 +8,7 @@
 
 ### Back-office
 - Pages login, logout et oubli de mot de passe
-- Includes header, side navbar et footer
+- Ajouts des includes header, side navbar et footer sur les pages (sauf dashboard.php)
 
 #### Page Boutique
 - Bouton pour ajout d'une image au slider
