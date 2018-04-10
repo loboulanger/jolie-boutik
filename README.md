@@ -17,8 +17,5 @@
 - Stratégie pour ajout d'un nouvel utilisateur
 - Card pour liste de tous les utilisateurs
 
-#### Page Profil
-- Possibilité d'ajouter ou mettre à jour l'image de profil (avatar)
-
 #### Page Produits
 - Page avec liste de tous les produits à partir de laquelle on sélectionnera un produit pour accéder à sa fiche et la possibilité de sa modification/mise à jour (+ possibilité une image si < 4)
