@@ -94,18 +94,18 @@
                         <h3 class="h4">Ajouter un produit</h3>
                       </div>
                       <div class="card-body">
-                        <form class="form-horizontal" method="post">
+                        <form class="form-horizontal">
                           <div class="form-group row">
                             <label class="col-sm-3 form-control-label">Nom</label>
                             <div class="col-sm-9">
-                              <input type="text" class="form-control" name="nom">
+                              <input type="text" class="form-control">
                             </div>
                           </div>
                           <div class="line"></div>
                           <div class="form-group row">
                             <label class="col-sm-3 form-control-label">Description</label>
                             <div class="col-sm-9">
-                              <textarea class="form-control" name="desc" rows="10"></textarea>
+                              <textarea class="form-control" name="" rows="10"></textarea>
                             </div>
                           </div>
                           <div class="line"></div>
@@ -114,30 +114,16 @@
                               <div class="col-sm-9">
                                 <div class="row">
                                   <div class="col-md-5">
-                             
-                                      <select  name="category" class="form-control">
-                                        <?php
-                                        // connexion à la base de données
-                                            try
-                                          {
-                                              $connexion = new PDO('mysql:host=localhost;dbname=boutik;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-                                          }
-
-                                            // Redefini le message d'erreur pour éviter trop d'infos restitutées
-                                            catch(Exception $e) {die('Erreur : ' .  $e->getmessage());};
-                                            $resultat = $connexion->query('SELECT * from category');
-                                            $listeCateg = $resultat->fetchAll(PDO::FETCH_ASSOC);
-                                            foreach ($listeCateg as $Categ ) {
-                                              ?> <option value="<?= $Categ['id_category'] ?>"> <?php echo $Categ['title'];?> </option> <?php
-                                            }   
-                                        ?>
-                                      </select>
+                                      <select name="account" class="form-control">
+                                          <option>Vendeur</option>
+                                          <option>Admin</option>
+                                        </select>
                                   </div>
                                   <div class="col-md-2">
                                       <label class="form-control-label">Prix</label>
                                   </div>
                                   <div class="col-md-5">
-                                    <input type="text" name="price" class="form-control">
+                                    <input type="text" class="form-control">
                                   </div>
                                 </div>
                               </div>
@@ -192,40 +178,6 @@
           </div>
       </div>
     </div>
-
-    <?php
-
-
-    // saise non vide
-    if (!empty($_POST)) {
-
-      var_dump($_POST['category']);
-
-      // connexion à la base de données
-          try
-        {
-            $connexion = new PDO('mysql:host=localhost;dbname=boutik;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-        }
-
-          // Redefini le message d'erreur pour éviter trop d'infos restitutées
-          catch(Exception $e) {die('Erreur : ' .  $e->getmessage());};
-
-                   
-          // Je prépare ma requete
-          $resultat = $connexion->prepare('INSERT INTO products (name, description, id_category, price, date_create) VALUES (:name, :description, :category, :price, "2018-03-06")');
-          $resultat->bindValue(':name', $_POST['nom']);
-          $resultat->bindValue(':description', $_POST['desc']);
-          $resultat->bindValue(':category', $_POST['category']);
-          $resultat->bindValue(':price', $_POST['price']);
-
-          // j'execute la requete
-          $resultat->execute();
-
-    }
-
-
-
-    ?>
     <!-- JavaScript files-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/popper.js/umd/popper.min.js"> </script>
