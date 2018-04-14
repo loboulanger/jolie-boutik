@@ -51,16 +51,9 @@ if (!empty($_POST)) {
     }
 
   # Vérification du champ product_price
-    # Si le champ n'est pas défini ou est vide
-    if(!isset($post['product_price']) OR empty($post['product_price'])){
+    if(!isset($post['product_price']) OR empty($post['product_price']) OR !is_numeric($post['product_price'])){
       // On affichera l'erreur correspondante
-      $errors['product_price_null'] = 'Vous devez entrer un prix pour le produit';
-    }
-
-    # Si le champ n'est pas "numeric"
-    if(!is_numeric($post['product_price'])){
-      // On affichera l'erreur correspondante
-      $errors['product_price_not_numeric'] = 'Le prix renseigné pas valide';
+      $errors['product_price_null'] = 'Vous devez entrer un prix valide pour le produit';
     }
   
   # Si aucune erreur, on enregistre le nouveau produit dans la base de données
@@ -71,7 +64,6 @@ if (!empty($_POST)) {
       if($query->execute([$_POST['product_name'], $_POST['product_price']])){
         // On crée un tableau pour affichage
         $success = "Le produit a bien été ajouté";
-        echo($success);
       }
     }
 
@@ -101,6 +93,25 @@ if (!empty($_POST)) {
                         <h3 class="h4">Ajouter un produit</h3>
                       </div>
                       <div class="card-body">
+                        <!-- Affichage des messages d'erreurs -->
+                        <?php if(!empty($errors)): ?>
+                          <div class="alert alert-danger">
+                              <p>Le formulaire n'a pas été rempli correctement :</p>
+                              <ul>
+                              <?php foreach($errors as $error): ?>
+                                  <li><?= $error; ?></li>
+                              <?php endforeach; ?>
+                              </ul>
+                          </div>
+                        <?php endif; ?>
+
+                        <!-- Affichage des messages de suucès -->
+                        <?php if(!empty($success)): ?>
+                          <div class="alert alert-success">
+                            <p><?= $success ?></p>
+                          </div>
+                        <?php endif; ?>
+
                         <form method="POST" class="form-horizontal">
                           <div class="form-group row">
                             <label class="col-sm-3 form-control-label">Nom</label>
@@ -168,7 +179,7 @@ if (!empty($_POST)) {
                                 <div class="line"></div>
                                 <div class="form-group row">
                                   <div class="col-sm-4">
-                                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                                    <button type="submit" class="btn btn-primary disabled">Ajouter</button>
                                   </div>
                           </form>
                         </div>
