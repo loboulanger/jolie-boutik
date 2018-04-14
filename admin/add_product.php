@@ -1,4 +1,87 @@
-<?php require "templates/header.php"; ?>
+<?php 
+
+require ('templates/header.php'); 
+require_once ('../inc/functions.php'); 
+
+// Connexion à la base de données
+require_once('../inc/bdd.php');
+
+// Requête à la base de données pour récupérer et afficher les catégories dans le formulaire
+$query = $db->prepare('SELECT * FROM categories');
+$query->execute();
+$categories = $query->fetchAll();
+
+//-----------------------------------------------------
+// Début des vérifications sur le formulaire
+//-----------------------------------------------------
+
+# Si le formulaire a été envoyé
+if (!empty($_POST)) {
+  // Création du tableau pour recueillir et "nettoyer" les données envoyées
+  $post = [];
+  foreach($_POST as $key => $value){
+    $post[$key] = trim(strip_tags($value));
+  }
+
+  // Avant de commancer les vérifications, on crée le tableau pour contenir les éventuelles erreurs
+  $errors = [];
+
+  # Vérification du champ product_name
+    if(!isset($post['product_name']) OR empty($post['product_name'])){
+      // On affichera l'erreur correspondante
+      $errors['product_name'] = 'Vous devez entrer le nom du produit';
+    }
+
+  # Vérification du champ product_desc
+    if(!isset($post['product_desc']) OR empty($post['product_desc'])){
+      // On affichera l'erreur correspondante
+      $errors['product_desc'] = 'Vous devez entrer une description pour le produit';
+    }
+
+  # Vérification du champ product_cat
+    // Tableau définissant les catégories acceptées
+    $cat = [];
+    foreach($categories as $categorie) {
+    $cat[] = $categorie['id_category'];
+    }
+    // Puis on vérifie que le champ sélectionné appartient bien au tableau $cat (en plus des autres vérifs)
+    if( !in_array($post['product_cat'], $cat)){
+      // On affichera l'erreur correspondante
+      $errors['product_cat'] = 'Vous devez choisir une catégorie pour le produit';
+    }
+
+  # Vérification du champ product_price
+    # Si le champ n'est pas défini ou est vide
+    if(!isset($post['product_price']) OR empty($post['product_price'])){
+      // On affichera l'erreur correspondante
+      $errors['product_price_null'] = 'Vous devez entrer un prix pour le produit';
+    }
+
+    # Si le champ n'est pas "numeric"
+    if(!is_numeric($post['product_price'])){
+      // On affichera l'erreur correspondante
+      $errors['product_price_not_numeric'] = 'Le prix renseigné pas valide';
+    }
+  
+  # Si aucune erreur, on enregistre le nouveau produit dans la base de données
+    if(empty($errors)){
+      debug($_POST);
+      $query = $db->prepare(' INSERT INTO products (name, price)
+                              VALUES (:name, :price');
+      $query->bindValue(':name', $post['product_name']);
+      $query->bindValue(':price', $post['product_price']);
+      
+      # Si tout s'est bien passé
+      if($query->execute()){
+        echo 'Tout bon';
+        // On crée un tableau pour affichage
+        // $success = [];
+      }
+    }
+
+}
+
+?>
       <div class="page-content d-flex align-items-stretch"> 
 
         <!-- Side Navbar -->
@@ -15,7 +98,6 @@
             <section class="forms"> 
               <div class="container-fluid">
                 <div class="row">
-
                   <!-- Form Elements -->
                   <div class="col-lg-7">
                     <div class="card">
@@ -23,18 +105,18 @@
                         <h3 class="h4">Ajouter un produit</h3>
                       </div>
                       <div class="card-body">
-                        <form class="form-horizontal">
+                        <form method="POST" class="form-horizontal">
                           <div class="form-group row">
                             <label class="col-sm-3 form-control-label">Nom</label>
                             <div class="col-sm-9">
-                              <input type="text" class="form-control">
+                              <input type="text" name="product_name" class="form-control" value="<?php if(isset($_POST['product_name'])){ echo $_POST['product_name']; } ?>">
                             </div>
                           </div>
                           <div class="line"></div>
                           <div class="form-group row">
                             <label class="col-sm-3 form-control-label">Description</label>
                             <div class="col-sm-9">
-                              <textarea class="form-control" name="" rows="10"></textarea>
+                              <textarea class="form-control" name="product_desc" rows="10"><?php if(isset($_POST['product_desc'])){ echo $_POST['product_desc']; } ?></textarea>
                             </div>
                           </div>
                           <div class="line"></div>
@@ -42,17 +124,23 @@
                               <label class="col-sm-3 form-control-label">Catégorie</label>
                               <div class="col-sm-9">
                                 <div class="row">
-                                  <div class="col-md-5">
-                                      <select name="account" class="form-control">
-                                          <option>Vendeur</option>
-                                          <option>Admin</option>
-                                        </select>
+                                  <div class="col-md-6">
+                                      <select name="product_cat" class="form-control">
+                                        <option>Choisir une catégorie</option>
+                                        <?php
+                                        foreach ($categories as $categorie) {
+                                          ?>
+                                          <option value="<?= $categorie['id_category'] ?>"><?= $categorie['title'] ?></option>
+                                          <?php
+                                        }
+                                        ?>
+                                      </select>
                                   </div>
                                   <div class="col-md-2">
                                       <label class="form-control-label">Prix</label>
                                   </div>
-                                  <div class="col-md-5">
-                                    <input type="text" class="form-control">
+                                  <div class="col-md-4">
+                                    <input type="text" name="product_price" class="form-control" value="<?php if(isset($_POST['product_price'])){ echo $_POST['product_price']; } ?>">
                                   </div>
                                 </div>
                               </div>
