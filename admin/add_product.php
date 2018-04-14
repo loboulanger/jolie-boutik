@@ -65,17 +65,13 @@ if (!empty($_POST)) {
   
   # Si aucune erreur, on enregistre le nouveau produit dans la base de données
     if(empty($errors)){
-      debug($_POST);
-      $query = $db->prepare(' INSERT INTO products (name, price)
-                              VALUES (:name, :price');
-      $query->bindValue(':name', $post['product_name']);
-      $query->bindValue(':price', $post['product_price']);
+      $query = $db->prepare('INSERT INTO products SET name = ?, price = ?');
       
       # Si tout s'est bien passé
-      if($query->execute()){
-        echo 'Tout bon';
+      if($query->execute([$_POST['product_name'], $_POST['product_price']])){
         // On crée un tableau pour affichage
-        // $success = [];
+        $success = "Le produit a bien été ajouté";
+        echo($success);
       }
     }
 
