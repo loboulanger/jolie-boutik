@@ -11,6 +11,3 @@
 
 #### Page Boutique
 - Update card pour le slider de la page d'accueil de la boutique
-
-#### Page Utilisateurs
-- Card pour liste de tous les utilisateurs
