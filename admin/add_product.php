@@ -116,14 +116,14 @@ if (!empty($_POST)) {
                           <div class="form-group row">
                             <label class="col-sm-3 form-control-label">Nom</label>
                             <div class="col-sm-9">
-                              <input type="text" name="product_name" class="form-control" value="<?php if(isset($_POST['product_name'])){ echo $_POST['product_name']; } ?>">
+                              <input type="text" name="product_name" class="form-control" value="<?php if(isset($_POST['product_name']) AND empty($success)){ echo $_POST['product_name']; } ?>">
                             </div>
                           </div>
                           <div class="line"></div>
                           <div class="form-group row">
                             <label class="col-sm-3 form-control-label">Description</label>
                             <div class="col-sm-9">
-                              <textarea class="form-control" name="product_desc" rows="10"><?php if(isset($_POST['product_desc'])){ echo $_POST['product_desc']; } ?></textarea>
+                              <textarea class="form-control" name="product_desc" rows="10"><?php if(isset($_POST['product_desc']) AND empty($success)){ echo $_POST['product_desc']; } ?></textarea>
                             </div>
                           </div>
                           <div class="line"></div>
@@ -131,7 +131,7 @@ if (!empty($_POST)) {
                               <label class="col-sm-3 form-control-label">Catégorie</label>
                               <div class="col-sm-9">
                                 <div class="row">
-                                  <div class="col-md-6">
+                                  <div class="col-md-7">
                                       <select name="product_cat" class="form-control">
                                         <option>Choisir une catégorie</option>
                                         <?php
@@ -146,8 +146,8 @@ if (!empty($_POST)) {
                                   <div class="col-md-2">
                                       <label class="form-control-label">Prix</label>
                                   </div>
-                                  <div class="col-md-4">
-                                    <input type="text" name="product_price" class="form-control" value="<?php if(isset($_POST['product_price'])){ echo $_POST['product_price']; } ?>">
+                                  <div class="col-md-3">
+                                    <input type="text" name="product_price" class="form-control" value="<?php if(isset($_POST['product_price']) AND empty($success)){ echo $_POST['product_price']; } ?>">
                                   </div>
                                 </div>
                               </div>
