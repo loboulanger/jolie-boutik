@@ -5,3 +5,9 @@
 .alert {
     font-size: 0.9em;
 }
+.fa-times {
+    color: red;
+}
+.fa-check {
+    color: green;
+}

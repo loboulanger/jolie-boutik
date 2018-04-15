@@ -1,4 +1,18 @@
-<?php require "templates/header.php"; ?>
+<?php
+
+require ('templates/header.php'); 
+require_once ('../inc/functions.php'); 
+
+// Connexion à la base de données
+require_once('../inc/bdd.php');
+
+// Requête à la base de données pour récupérer et afficher les produits
+$query = $db->prepare('SELECT * FROM products INNER JOIN categories ON products.category = categories.id_category');
+$query->execute();
+$products = $query->fetchAll();
+// debug($products);
+
+?>
       <div class="page-content d-flex align-items-stretch"> 
         <!-- Side Navbar -->
         <?php require "templates/side-navbar.php"; ?>
@@ -13,120 +27,56 @@
             <section class="forms"> 
               <div class="container-fluid">
                 <div class="row">
-
-                  <!-- Form Elements -->
-                  <div class="col-lg-7">
+                  <div class="col-lg-12">
                     <div class="card">
-                      <div class="card-header d-flex align-items-center">
-                        <h3 class="h4">Modifier un produit</h3>
-                      </div>
-                      <div class="card-body">
-                        <form class="form-horizontal">
-                          <div class="form-group row">
-                            <label class="col-sm-3 form-control-label">Nom</label>
-                            <div class="col-sm-9">
-                              <input type="text" class="form-control">
-                            </div>
-                          </div>
-                          <div class="line"></div>
-                          <div class="form-group row">
-                            <label class="col-sm-3 form-control-label">Description</label>
-                            <div class="col-sm-9">
-                              <textarea class="form-control" name="" rows="10"></textarea>
-                            </div>
-                          </div>
-                          <div class="line"></div>
-                          <div class="form-group row">
-                              <label class="col-sm-3 form-control-label">Catégorie</label>
-                              <div class="col-sm-9">
-                                <div class="row">
-                                  <div class="col-md-5">
-                                      <select name="account" class="form-control">
-                                          <option>Vendeur</option>
-                                          <option>Admin</option>
-                                        </select>
-                                  </div>
-                                  <div class="col-md-2">
-                                      <label class="form-control-label">Prix</label>
-                                  </div>
-                                  <div class="col-md-5">
-                                    <input type="text" class="form-control">
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          <div class="line"></div>
-                          <div class="form-group row">
-                            <div class="col-sm-4 offset-sm-3">
-                              <button type="submit" class="btn btn-primary">Ajouter</button>
-                            </div>
-                          </div>
-                        </form>
+                    <div class="card-header d-flex align-items-center">
+                      <h3 class="h4">Liste des produits</h3>
+                    </div>
+                    <div class="card-body">
+                      <div class="table-responsive">  
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th>#</th>
+                              <th>Nom</th>
+                              <th>Prix</th>
+                              <th>Catégorie</th>
+                              <th>Disponibilité</th>
+                              <th></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <?php
+                            foreach ($products as $product) {
+                              ?>
+                              <tr>
+                                <th scope="row"><?= $product['id_products'] ?></th>
+                                <td><?= $product['name'] ?></td>
+                                <td><?= $product['price'] ?> €</td>
+                                <td><?= $product['title'] ?></td>
+                                <td>
+                                  <?php if ($product['dispo'] == 1) {
+                                    echo '<i class="fa fa-check"></i>';
+                                  } else {
+                                    echo '<i class="fa fa-times"></i>';
+                                  } 
+                                  ?>
+                                </td>
+                                <td>
+                                  <a href="update_product.php?id=<?= $product['id_products'] ?>">
+                                    <button class="btn btn-primary">Modifier le produit</button>
+                                  </a>
+                                </td>
+                              </tr>
+
+                              <?php
+                            }
+                            ?>
+                          </tbody>
+                        </table>
                       </div>
                     </div>
                   </div>
-
-                  <!-- Add Picture -->
-                  <div class="col-lg-5">
-                      <div class="card">
-                        <div class="card-header d-flex align-items-center">
-                          <h3 class="h4">Images du produit</h3>
-                        </div>
-                        <div class="card-body">
-                          <div class="table-responsive">
-                            <table class="table">
-                              <thead>
-                                <tr>
-                                  <th>#</th>
-                                  <th>Titre</th>
-                                  <th></th>
-                                  <th></th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <th scope="row">1</th>
-                                  <td>Titre 1</td>
-                                  <td><button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary">Voir</button></td>
-                                  <td>
-                                      <form class="form-inline">
-                                          <div class="form-group">
-                                              <button type="submit" class="btn btn-primary">Supprimer</button>
-                                          </div>
-                                        </form>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">2</th>
-                                  <td>Titre 2</td>
-                                  <td><button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary">Voir</button></td>
-                                  <td>
-                                    <form class="form-inline">
-                                      <div class="form-group">
-                                          <button type="submit" class="btn btn-primary">Supprimer</button>
-                                      </div>
-                                    </form>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">3</th>
-                                  <td>Titre 3</td>
-                                  <td><button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary">Voir</button></td>
-                                  <td>
-                                      <form class="form-inline">
-                                          <div class="form-group">
-                                              <button type="submit" class="btn btn-primary">Supprimer</button>
-                                          </div>
-                                        </form>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  
                 </div>
               </div>
             </section>
