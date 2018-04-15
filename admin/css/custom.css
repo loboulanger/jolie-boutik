@@ -1,1 +1,7 @@
-/* your styles go here */
+.forms p {
+    font-size: inherit;
+    color: inherit;
+}
+.alert {
+    font-size: 0.9em;
+}
