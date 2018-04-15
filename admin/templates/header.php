@@ -43,6 +43,8 @@
               </div>
               <!-- Navbar Menu -->
               <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+                <!-- To the shop    -->
+                <li class="nav-item"><a href="../" class="nav-link logout">Voir la boutique<i class="fa fa-desktop"></i></a></li>
                 <!-- Logout    -->
                 <li class="nav-item"><a href="logout.php" class="nav-link logout">Se déconnecter<i class="fa fa-sign-out"></i></a></li>
               </ul>
