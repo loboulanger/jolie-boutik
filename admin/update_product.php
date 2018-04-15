@@ -232,8 +232,8 @@ if (!empty($_POST)) {
                     </div>
                   </div>
 
-                  <!-- Pictures Product -->
                   <div class="col-lg-5">
+                      <!-- Pictures Product -->
                       <div class="card">
                         <div class="card-header d-flex align-items-center">
                           <h3 class="h4">Images du produit</h3>
@@ -288,15 +288,10 @@ if (!empty($_POST)) {
                                   </td>
                                 </tr>
                                 <tr>
-                                  <th scope="row">3</th>
+                                  <th scope="row">4</th>
                                   <td></td>
                                   <td></td>
                                   <td>
-                                      <form class="form-inline">
-                                          <div class="form-group">
-                                              <button type="submit" class="btn btn-primary">Ajouter</button>
-                                          </div>
-                                        </form>
                                   </td>
                                 </tr>
                               </tbody>
@@ -304,9 +299,32 @@ if (!empty($_POST)) {
                           </div>
                         </div>
                       </div>
-                    </div>
+                      <!-- Add Picture -->                       
+                      <div class="card">
+                        <div class="card-header d-flex align-items-center">
+                          <h3 class="h4">Ajouter une photo</h3>
+                        </div>
+                        <div class="card-body">
+                          <form class="form-inline">
+                            <div class="form-group row">
+                              <div class="col-sm-12">
+                                <input id="fileInput" type="file" class="form-control-file">
+                              </div>
+                            </div>
+                            <div class="line"></div>
+                            <div class="form-group row">
+                              <div class="col-sm-4">
+                                <button type="submit" class="btn btn-primary disabled">Ajouter</button>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                  </div>
+                  </div>
                   
                 </div>
+
+                
               </div>
             </section>
             <!-- Page Footer-->
