@@ -8,14 +8,9 @@
 
 ### Back-office
 - Pages login, logout et oubli de mot de passe
-- Ajouts des includes header, side navbar et footer sur les pages (sauf dashboard.php)
 
 #### Page Boutique
-- Card pour ajout d'une image au slider
+- Update card pour le slider de la page d'accueil de la boutique
 
 #### Page Utilisateurs
-- Stratégie pour ajout d'un nouvel utilisateur
 - Card pour liste de tous les utilisateurs
-
-#### Page Produits
-- Page avec liste de tous les produits à partir de laquelle on sélectionnera un produit pour accéder à sa fiche et la possibilité de sa modification/mise à jour (+ possibilité une image si < 4)
