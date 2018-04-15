@@ -15,8 +15,8 @@
     <li><a href="update_profile.php"> <i class="icon-picture"></i>Profil </a></li>
     <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Produits </a>
       <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
+        <li><a href="products.php">Liste des produits</a></li>
         <li><a href="add_product.php">Ajouter un produit</a></li>
-        <li><a href="update_product.php">Modifier un produit</a></li>
       </ul>
     </li>
   </ul> 
