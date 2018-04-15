@@ -1,80 +1,12 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Espace d'administration Jolie Boutik</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="robots" content="all,follow">
-    <!-- Bootstrap CSS-->
-    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
-    <!-- Font Awesome CSS-->
-    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
-    <!-- Fontastic Custom icon font-->
-    <link rel="stylesheet" href="css/fontastic.css">
-    <!-- Google fonts - Poppins -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
-    <!-- theme stylesheet-->
-    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
-    <!-- Custom stylesheet - for your changes-->
-    <link rel="stylesheet" href="css/custom.css">
-    <!-- Favicon-->
-    <link rel="shortcut icon" href="img/favicon.ico">
-    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-  </head>
-  <body>
-    <div class="page">
-      <!-- Main Navbar-->
-      <header class="header">
-        <nav class="navbar">
+<?php 
 
-          <div class="container-fluid">
-            <div class="navbar-holder d-flex align-items-center justify-content-between">
-              <!-- Navbar Header-->
-              <div class="navbar-header">
-                <!-- Navbar Brand --><a href="index.php" class="navbar-brand">
-                  <div class="brand-text brand-big"><span>Jolie Boutik </span><strong> Dashboard</strong></div>
-                  <div class="brand-text brand-small"><strong>JBD</strong></div></a>
-                <!-- Toggle Button-->
-                <a id="toggle-btn" href="#" class="menu-btn active"><span></span><span></span><span></span></a>
-              </div>
-              <!-- Navbar Menu -->
-              <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
-                <!-- Logout    -->
-                <li class="nav-item"><a href="logout.php" class="nav-link logout">Se déconnecter<i class="fa fa-sign-out"></i></a></li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </header>
+require ('templates/header.php'); 
+
+?>
       <div class="page-content d-flex align-items-stretch"> 
         <!-- Side Navbar -->
-        <nav class="side-navbar">
-          <!-- Sidebar Header-->
-          <div class="sidebar-header d-flex align-items-center">
-            <div class="avatar"><img src="img/avatar-1.jpg" alt="..." class="img-fluid rounded-circle"></div>
-            <div class="title">
-              <h1 class="h4">Paul Bernard</h1>
-              <p>Admin</p>
-            </div>
-          </div>
-          <!-- Sidebar Navidation Menus-->
-          <ul class="list-unstyled">
-                    <li class="active"><a href="dashboard.php"> <i class="icon-home"></i>Accueil </a></li>
-                    <li><a href="update_shop.php"> <i class="icon-screen"></i>Boutique </a></li>
-                    <li><a href="add_users.php"> <i class="icon-user"></i>Utilisateurs </a></li>
-                    <li><a href="update_profile.php"> <i class="icon-picture"></i>Profil </a></li>
-                    <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Produits </a>
-                      <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
-                        <li><a href="add_product.php">Ajouter un produit</a></li>
-                        <li><a href="update_product.php">Modifier un produit</a></li>
-                      </ul>
-                    </li>
-          </ul>
-        </nav>
+        <?php require "templates/side-navbar.php"; ?>
+
         <div class="content-inner" style="padding-bottom: 59px;">
             <!-- Page Header-->
             <header class="page-header">
@@ -88,7 +20,7 @@
                 <div class="row">
 
                   <!-- Form Elements -->
-                  <div class="col-lg-8">
+                  <div class="col-lg-6">
                     <div class="card">
                       <div class="card-header d-flex align-items-center">
                         <h3 class="h4">Ajouter un utilisateur</h3>
@@ -96,30 +28,31 @@
                       <div class="card-body">
                         <form class="form-horizontal" method="post">
                           <div class="form-group row">
-                            <label class="col-sm-3 form-control-label">Nom d'utilisateur</label>
+                            <label class="col-sm-3 form-control-label">Nom</label>
                             <div class="col-sm-9">
-                              <input type="text" class="form-control" name="name_users">
+                              <input type="text" class="form-control" name="">
                             </div>
                           </div>
                           <div class="line"></div>
                           <div class="form-group row">
-                            <label class="col-sm-3 form-control-label">Mot de passe</label>
+                            <label class="col-sm-3 form-control-label">Prénom</label>
                             <div class="col-sm-9">
-                              <input type="password" name="password" class="form-control"><small class="help-block-none">Spécificités du mot de passe.</small>
+                              <input type="text" class="form-control" name="">
                             </div>
                           </div>
                           <div class="line"></div>
                           <div class="form-group row">
-                              <label class="col-sm-3 form-control-label">Confirmer le mot de passe</label>
-                              <div class="col-sm-9">
-                                <input type="password" name="password2" class="form-control">
-                              </div>
+                            <label class="col-sm-3 form-control-label">Adresse email</label>
+                            <div class="col-sm-9">
+                              <input type="email" name="" class="form-control">
+                            </div>
                           </div>
                           <div class="line"></div>
                           <div class="form-group row">
                             <label class="col-sm-3 form-control-label">Rôle</label>
                             <div class="col-sm-9 select">
-                              <select name="account" class="form-control">
+                              <select name="" class="form-control">
+                                <option>Choisir...</option>
                                 <option>Vendeur</option>
                                 <option>Admin</option>
                               </select>
@@ -139,93 +72,4 @@
               </div>
             </section>
             <!-- Page Footer-->
-            <footer class="main-footer">
-              <div class="container-fluid">
-                <div class="row">
-                  <div class="col-sm-6">
-                    <p>Jolie Boutique © 2018</p>
-                  </div>
-                </div>
-              </div>
-            </footer>
-          </div>
-      </div>
-    </div>
-
-    <?php
-
-    $saisieOK = true;
-   
-    // Je récupère les infos saisies par l'utilisateur
-    if ( isset($_POST) && !empty($_POST) ) {
-
-      // Je controle le nom de l'utilisateur (chaine de caractères)
-      if (empty($_POST['name_users']) || !is_string($_POST['name_users']) ) {
-        $saisieOK  = false;
-       
-      }      
-
-      // je controle le psw1
-      if (preg_match('#^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[a-zA-Z0-9]{8,12}$#', $_POST['password'])) {
-      } else { 
-          $saisieOK  = false;
-      
-      };
-
-      // Je contrele le psw2
-      if (preg_match('#^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[a-zA-Z0-9]{8,12}$#',$_POST['password2'])) {
-       } else { 
-          $saisieOK  = false;
-      
-      };
-
-      // Je controle l'égalité entre psw1 et psw2 
-      if ($_POST['password'] != $_POST['password2']) { 
-         $saisieOK  = false;
-      
-      }
-
-      // Je controle le role 
-      if (!isset($_POST['account']) || ( ($_POST['account']) != "Vendeur" &&  ($_POST['account']) != "Admin") ) {
-           $saisieOK  = false;
-      
-      }
-
-      if ($saisieOK) {
-
-          // connexion à la base de données
-          try
-        {
-            $connexion = new PDO('mysql:host=localhost;dbname=boutik;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-        }
-
-          // Redefini le message d'erreur pour éviter trop d'infos restitutées
-          catch(Exception $e) {die('Erreur : ' .  $e->getmessage());};
-
-                   
-          // Je prépare ma requete
-          $resultat = $connexion->prepare('INSERT INTO users (name, password, role) VALUES (:name, :psw, :role)');
-          $resultat->bindValue(':name', $_POST['name_users']);
-          $resultat->bindValue(':psw', password_hash($_POST['password'], PASSWORD_DEFAULT));
-          $resultat->bindValue(':role', $_POST['account']);
-
-          // j'execute la requete
-          $resultat->execute();
-      } else {
-        echo "saisie incorrecte";
-              }
-    }
-    ?>
-
-    <!-- JavaScript files-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/popper.js/umd/popper.min.js"> </script>
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
-    <script src="vendor/chart.js/Chart.min.js"></script>
-    <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
-    <script src="js/charts-home.js"></script>
-    <!-- Main File-->
-    <script src="js/front.js"></script>
-  </body>
-</html>
+            <?php require "templates/footer.php"; ?>
