@@ -10,4 +10,18 @@
 - Pages login, logout et oubli de mot de passe
 
 #### Page Boutique
-- Update card pour le slider de la page d'accueil de la boutique
+- Fix Coordonnées
+- Gestion du slider
+
+#### Pages Utilisateurs
+- Fix liste des utilisateurs
+- Fix ajout d'utilisateur
+
+#### Pages Profil
+- Fix changement de mot de passe
+
+#### Pages Produits
+- Gestion des images de produits
+- Suppression de produit (ajax)
+- Fix modification de produit
+- Fix ajout de produit (select)
