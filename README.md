@@ -14,7 +14,7 @@
 - Gestion du slider
 
 #### Pages Utilisateurs
-- Fix liste des utilisateurs
+- Fix liste des utilisateurs avec suppression (ajax)
 - Fix ajout d'utilisateur
 
 #### Pages Profil
