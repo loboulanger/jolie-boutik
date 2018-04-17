@@ -43,6 +43,7 @@ $products = $query->fetchAll();
                               <th>Catégorie</th>
                               <th>Disponibilité</th>
                               <th></th>
+                              <th></th>
                             </tr>
                           </thead>
                           <tbody>
@@ -64,7 +65,12 @@ $products = $query->fetchAll();
                                 </td>
                                 <td>
                                   <a href="update_product.php?id=<?= $product['id_products'] ?>">
-                                    <button class="btn btn-primary">Modifier le produit</button>
+                                    <button class="btn btn-primary btn-sm">Modifier le produit</button>
+                                  </a>
+                                </td>
+                                <td>
+                                  <a href="#">
+                                    <button class="btn btn-primary btn-sm">Supprimer</button>
                                   </a>
                                 </td>
                               </tr>
