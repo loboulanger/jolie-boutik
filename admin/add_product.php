@@ -21,6 +21,7 @@ if (!empty($_POST)) {
   $post = [];
   foreach($_POST as $key => $value){
     $post[$key] = trim(strip_tags($value));
+    debug($post);
   }
 
   // Avant de commancer les vérifications, on crée le tableau pour contenir les éventuelles erreurs
@@ -58,10 +59,15 @@ if (!empty($_POST)) {
   
   # Si aucune erreur, on enregistre le nouveau produit dans la base de données
     if(empty($errors)){
-      $query = $db->prepare('INSERT INTO products SET name = ?, price = ?');
-      
+
+      $query = $db->prepare('INSERT INTO products (name, description, price, category, date_create) VALUES (:name, :desc, :price, :category, NOW())');
+      $query->bindValue(':name', $post['product_name']);
+      $query->bindValue(':desc', $post['product_desc']);
+      $query->bindValue(':price', $post['product_price']);
+      $query->bindValue(':category', $post['product_cat']);
+
       # Si tout s'est bien passé
-      if($query->execute([$_POST['product_name'], $_POST['product_price']])){
+      if($query->execute()){
         // On crée un tableau pour affichage
         $success = "Le produit a bien été ajouté";
       }
@@ -137,7 +143,7 @@ if (!empty($_POST)) {
                                         <?php
                                         foreach ($categories as $categorie) {
                                           ?>
-                                          <option value="<?= $categorie['id_category'] ?>"><?= $categorie['title'] ?></option>
+                                          <option value="<?= $categorie['id_category'] ?>" <?php if(isset($_POST['product_cat']) AND empty($success) AND $_POST['product_cat'] == $categorie['id_category']){ echo "selected"; } ?>><?= $categorie['title'] ?></option>
                                           <?php
                                         }
                                         ?>
@@ -167,7 +173,7 @@ if (!empty($_POST)) {
                   <div class="col-lg-5">                           
                       <div class="card">
                         <div class="card-header d-flex align-items-center">
-                          <h3 class="h4">Ajouter une photo</h3>
+                          <h3 class="h4">Ajouter une image</h3>
                         </div>
                         <div class="card-body">
                           <form class="form-inline">
