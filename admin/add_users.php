@@ -1,6 +1,15 @@
 <?php 
 
 require ('templates/header.php'); 
+require_once ('../inc/functions.php'); 
+
+// Connexion à la base de données
+require_once('../inc/bdd.php');
+
+// Requête à la base de données pour récupérer et afficher les utilisateurs
+$query = $db->prepare('SELECT * FROM users INNER JOIN roles WHERE users.role = roles.id');
+$query->execute();
+$users = $query->fetchAll();
 
 ?>
       <div class="page-content d-flex align-items-stretch"> 
@@ -20,7 +29,7 @@ require ('templates/header.php');
                 <div class="row">
 
                   <!-- Form Elements -->
-                  <div class="col-lg-7">
+                  <div class="col-lg-8">
                     <div class="card">
                     <div class="card-header d-flex align-items-center">
                       <h3 class="h4">Liste des utilisateurs</h3>
@@ -39,30 +48,20 @@ require ('templates/header.php');
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <th scope="row">1</th>
-                              <td>Mark</td>
-                              <td>Otto</td>
-                              <td>nom@email.com</td>
-                              <td>Admin</td>
-                              <td><button type="submit" class="btn btn-primary btn-sm">Supprimer</button></td>
-                            </tr>
-                            <tr>
-                              <th scope="row">2</th>
-                              <td>Jacob</td>
-                              <td>Thornton</td>
-                              <td>nom@email.com</td>
-                              <td>Vendeur</td>
-                              <td><button type="submit" class="btn btn-primary btn-sm">Supprimer</button></td>
-                            </tr>
-                            <tr>
-                              <th scope="row">3</th>
-                              <td>Larry</td>
-                              <td>the Bird</td>
-                              <td>nom@email.com</td>
-                              <td>Vendeur</td>
-                              <td><button type="submit" class="btn btn-primary btn-sm">Supprimer</button></td>
-                            </tr>
+                            <?php
+                            foreach ($users as $user) {
+                              ?>
+                              <tr>
+                                <th scope="row"><?= $user['id_users'] ?></th>
+                                <td><?= $user['name'] ?></td>
+                                <td><?= $user['firstname'] ?></td>
+                                <td><?= $user['email'] ?></td>
+                                <td><?= $user['role'] ?></td>
+                                <td><button type="submit" class="btn btn-primary btn-sm">Supprimer</button></td>
+                              </tr>
+                              <?php
+                            }
+                            ?>
                           </tbody>
                         </table>
                       </div>
