@@ -10,7 +10,6 @@ require_once('../inc/bdd.php');
 $query = $db->prepare('SELECT * FROM infos');
 $query->execute();
 $infos = $query->fetch();
-debug($infos);
 
 //-----------------------------------------------------
 // Début des vérifications sur le formulaire
@@ -23,7 +22,6 @@ if (!empty($_POST)) {
   foreach($_POST as $key => $value){
     $post[$key] = trim(strip_tags($value));
   }
-  debug($post);
 
   // Avant de commancer les vérifications, on crée le tableau pour contenir les éventuelles erreurs
   $errors = [];
