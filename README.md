@@ -8,13 +8,14 @@
 
 ### Back-office
 - Pages login, logout et oubli de mot de passe
+- Page première connexion utilisateur
+- Modification de mot de passe
 
 #### Page Boutique
 - Gestion du slider
 
 #### Pages Utilisateurs
 - Suppression d'utilisateur (ajax) (*)
-- Fix ajout d'utilisateur (*)
 
 #### Pages Profil
 - Fix changement de mot de passe
