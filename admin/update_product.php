@@ -10,19 +10,16 @@ require_once('../inc/bdd.php');
 $query = $db->prepare('SELECT * FROM categories');
 $query->execute();
 $categories = $query->fetchAll();
-// debug($categories);
 
 // Requête à la base de données pour récupérer les infos du produit concerné
 $query = $db->prepare('SELECT * FROM products WHERE id_products = ?');
 $query->execute(array($_GET['id']));
 $productSheet = $query->fetch();
-debug($productSheet);
 
-// Requête à la base de données des disposnibilités
+// Requête à la base de données des disponibilités
 $query = $db->prepare('SELECT * FROM availability');
 $query->execute();
 $availability = $query->fetchAll();
-// debug($availability);
 
 //-----------------------------------------------------
 // Début des vérifications sur le formulaire
@@ -35,7 +32,6 @@ if (!empty($_POST)) {
   foreach($_POST as $key => $value){
     $post[$key] = trim(strip_tags($value));
   }
-  debug($post);
 
   // Avant de commancer les vérifications, on crée le tableau pour contenir les éventuelles erreurs
   $errors = [];
@@ -60,30 +56,27 @@ if (!empty($_POST)) {
 
   # Si aucune erreur, on met à jour le produit dans la base de données
   if(empty($errors)){
-    $statement = $db->prepare('UPDATE products SET name = ?, price = ?, desc = ?, category = ?, dispo  = ? 
-                                WHERE id_products = ?');
-    $statement->execute(array(
-      $post['product-name__update'],
-      $post['product-price__update'],
-      $post['product-desc__update'],
-      $post['product-cat__update'],
-      $post['product-dispo__update'],
-      $productSheet['id_products']
-    ));
+    $stmt = $db->prepare('UPDATE products
+                          SET name = :name__updated, 
+                              price = :price__updated,
+                              description = :desc__updated, 
+                              category = :cat__updated, 
+                              dispo  = :dispo__updated, 
+                              date_modif = NOW() 
+                          WHERE id_products = :id');
 
-    // $statement -> bindValue(':name__updated', $post['product-name__update']);
-    // $statement -> bindValue(':price__updated', $post['product-price__update']);
-    // $statement -> bindValue(':desc__updated', $post['product-desc__update']);
-    // $statement -> bindValue(':cat__updated', $post['product-cat__update']);
-    // $statement -> bindValue(':dispo__updated', $post['product-dispo__update']);
-    // $statement -> bindValue(':id', $productSheet['id_products']);
-    // $statement->execute();
+    $stmt -> bindValue(':name__updated', $post['product-name__update']);
+    $stmt -> bindValue(':price__updated', $post['product-price__update']);
+    $stmt -> bindValue(':desc__updated', $post['product-desc__update']);
+    $stmt -> bindValue(':cat__updated', $post['product-cat__update']);
+    $stmt -> bindValue(':dispo__updated', $post['product-dispo__update']);
+    $stmt -> bindValue(':id', $productSheet['id_products']);
     
     # Si tout s'est bien passé
-    // if($query->execute(){
-    //   // On crée un tableau pour affichage
-    //   $success = "Le produit a bien été mis à jour";
-    // }
+    if($stmt->execute()){
+      // On crée un tableau pour affichage
+      $success = "Le produit a bien été mis à jour";
+    }
   }
 }
 
@@ -151,7 +144,7 @@ if (!empty($_POST)) {
                                 if (!empty($errors) OR !empty($success)) {
                                   echo $post['product-desc__update'];
                                 } else {
-                                  echo($productSheet['desc']);
+                                  echo($productSheet['description']);
                                 }
                                 ?></textarea>
                             </div>
