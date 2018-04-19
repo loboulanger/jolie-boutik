@@ -11,6 +11,11 @@ $query = $db->prepare('SELECT * FROM infos');
 $query->execute();
 $infos = $query->fetch();
 
+// Requête à la base de données pour récupérer les info du slider
+$query = $db->prepare('SELECT * FROM slider');
+$query->execute();
+$slider = $query->fetchAll();
+
 //-----------------------------------------------------
 // Début des vérifications sur le formulaire
 //-----------------------------------------------------
@@ -93,21 +98,23 @@ if (!empty($_POST)) {
                                   <th>CTA</th>
                                   <th>Image</th>
                                   <th></th>
+                                  <th></th>
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr>
-                                  <th scope="row">1</th>
-                                  <td>Titre 1</td>
-                                  <td>Sous-titre 1</td>
-                                  <td>CTA 1</td>
-                                  <td>img-1</td>
+                                <?php
+                                foreach ($slider as $slideId) {
+                                  ?>
+                                  <tr>
+                                  <th scope="row"><?= $slideId['id'] ?></th>
+                                  <td><?= $slideId['title'] ?></td>
+                                  <td><?= $slideId['subtitle'] ?></td>
+                                  <td><?= $slideId['cta'] ?></td>
+                                  <td><?= $slideId['images'] ?></td>
                                   <td>
-                                      <form class="form-inline">
-                                          <div class="form-group">
-                                              <button type="submit" class="btn btn-primary btn-sm">Modifier</button>
-                                          </div>
-                                        </form>
+                                    <a href="update_slide.php?id=<?= $slideId['id'] ?>">
+                                      <button type="submit" class="btn btn-primary btn-sm">Modifier</button>
+                                    </a>
                                   </td>
                                   <td>
                                       <form class="form-inline">
@@ -117,48 +124,9 @@ if (!empty($_POST)) {
                                         </form>
                                   </td>
                                 </tr>
-                                <tr>
-                                  <th scope="row">2</th>
-                                  <td>Titre 2</td>
-                                  <td>Sous-titre 2</td>
-                                  <td>CTA 2</td>
-                                  <td>img-2</td>
-                                  <td>
-                                      <form class="form-inline">
-                                          <div class="form-group">
-                                              <button type="submit" class="btn btn-primary btn-sm">Modifier</button>
-                                          </div>
-                                        </form>
-                                  </td>
-                                  <td>
-                                      <form class="form-inline">
-                                          <div class="form-group">
-                                              <button type="submit" class="btn btn-primary btn-sm">Supprimer</button>
-                                          </div>
-                                        </form>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">3</th>
-                                  <td>Titre 3</td>
-                                  <td>Sous-titre 3</td>
-                                  <td>CTA 3</td>
-                                  <td>img-3</td>
-                                  <td>
-                                      <form class="form-inline">
-                                          <div class="form-group">
-                                              <button type="submit" class="btn btn-primary btn-sm">Modifier</button>
-                                          </div>
-                                        </form>
-                                  </td>
-                                  <td>
-                                      <form class="form-inline">
-                                          <div class="form-group">
-                                              <button type="submit" class="btn btn-primary btn-sm">Supprimer</button>
-                                          </div>
-                                        </form>
-                                  </td>
-                                </tr>
+                                  <?php
+                                }
+                                ?>
                               </tbody>
                             </table>
                           </div>
